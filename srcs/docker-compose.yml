@@ -1,7 +1,60 @@
 version: "3.3"
+
+volumes:
+  mariadbdata:
+  wordpressdata:
+
+networks:
+  yeet:
+
 services:
   nginx:
     build: ./requirements/nginx/
+    container_name: nginx
+    image: nginx
     ports:
-      - "80:80"
-    
+      - "443:443"
+    restart: always
+    networks:
+      - yeet
+    depends_on:
+      - wordpress
+    volumes:
+      - ./wordpress:/var/www/html
+
+  mariadb:
+    #build: ./requirements/mariadb/ 
+    #container_name: mariadb
+    image: mariadb
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      - yeet
+    volumes:
+      - mariadbdata:/var/lib/mysql
+    env_file: .env
+    environment:
+      - MYSQL_DATABASE=wordpress
+
+  wordpress:
+    #build: ./requirements/wordpress/
+    #container_name: wordpress
+    image: wordpress:4.7.1-php7.0-fpm
+    ports:
+      - "9000:9000"
+    restart: always
+    networks:
+      - yeet
+    volumes:
+      - wordpressdata:/var/www/html
+    depends_on:
+      - mariadb
+    links:
+      - mariadb
+    env_file: .env
+    environment:
+      - WORDPRESS_DB_HOST=mariadb:3306
+      - WORDPRESS_DB_USER=$MYSQL_USER
+      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
+      - WORDPRESS_DB_NAME=wordpress
