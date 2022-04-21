@@ -9,5 +9,5 @@ CREATE USER 'nschumac2'@'%' IDENTIFIED BY '1234';
 adds admin privileges to user nschumac
 GRANT flush and reloads everything 
 */
-GRANT ALL ON wordpress.* TO 'nschumac'@'%';
+GRANT ALL ON *.* TO 'nschumac'@'%';
 FLUSH PRIVILEGES;

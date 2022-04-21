@@ -29,7 +29,7 @@ define( 'DB_USER', 'nschumac' );
 define( 'DB_PASSWORD', '123' );
 
 /** Database hostname */
-define( 'DB_HOST', 'mariadb' );
+define( 'DB_HOST', 'mariadb:3306' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -83,6 +83,7 @@ define( 'WP_DEBUG', false );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
+define( 'WP_ALLOW_REPAIR', true);
 
 
 /* That's all, stop editing! Happy publishing. */
