@@ -10,4 +10,3 @@ adds admin privileges to user nschumac
 GRANT flush and reloads everything 
 */
 GRANT ALL ON *.* TO 'nschumac'@'%';
-FLUSH PRIVILEGES;
