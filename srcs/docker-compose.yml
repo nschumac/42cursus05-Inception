@@ -1,8 +1,8 @@
 version: "3.3"
 
 volumes:
-  mariadbdata:
-  wordpressdata:
+  mariadb_volume:
+  wordpress_volume:
 
 networks:
   yeet:
@@ -11,7 +11,7 @@ services:
   nginx:
     build: ./requirements/nginx/
     container_name: nginx
-    image: nginx
+    #image: nginx
     ports:
       - "443:443"
     restart: always
@@ -20,34 +20,34 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - ./wordpress:/var/www/html
+      - wordpress_volume:/var/www/wordpress
 
   mariadb:
-    #build: ./requirements/mariadb/ 
-    #container_name: mariadb
-    image: mariadb
+    build: ./requirements/mariadb/ 
+    container_name: mariadb
+    #image: mariadb
     ports:
       - "3306:3306"
     restart: always
     networks:
       - yeet
     volumes:
-      - mariadbdata:/var/lib/mysql
+      - mariadb_volume:/var/lib/mysql
     env_file: .env
     environment:
       - MYSQL_DATABASE=wordpress
 
   wordpress:
-    #build: ./requirements/wordpress/
-    #container_name: wordpress
-    image: wordpress:4.7.1-php7.0-fpm
+    build: ./requirements/wordpress/
+    container_name: wordpress
+    #image: wordpress
     ports:
       - "9000:9000"
     restart: always
     networks:
       - yeet
     volumes:
-      - wordpressdata:/var/www/html
+      - wordpress_volume:/var/www/wordpress
     depends_on:
       - mariadb
     links:
