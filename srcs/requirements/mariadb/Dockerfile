@@ -16,4 +16,4 @@ RUN service mysql start && mysql < config.sql \
 
 EXPOSE 3306
 
-CMD ["mysqld_safe"]
+CMD ["mysqld"]

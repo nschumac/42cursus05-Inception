@@ -35,7 +35,10 @@ services:
       - mariadb_volume:/var/lib/mysql
     env_file: .env
     environment:
-      - MYSQL_DATABASE=wordpress
+      - MYSQL_DATABASE=$DB_NAME
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+      - MYSQL_USER=$DB_USER
+      - MYSQL_PASSWORD=$DB_PASSWORD
 
   wordpress:
     build: ./requirements/wordpress/
@@ -54,7 +57,7 @@ services:
       - mariadb
     env_file: .env
     environment:
-      - WORDPRESS_DB_HOST=mariadb:3306
-      - WORDPRESS_DB_USER=$MYSQL_USER
-      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_HOST=$DB_HOST
+      - WORDPRESS_DB_USER=$DB_USER
+      - WORDPRESS_DB_PASSWORD=$DB_PASSWORD
+      - WORDPRESS_DB_NAME=$DB_NAME
