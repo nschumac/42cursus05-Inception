@@ -3,11 +3,12 @@ cd /var/www/wordpress
 wp core download --allow-root
 
 #https://webkul.com/blog/install-wordpress-through-wp-cli-in-few-seconds/
-wp core config	--dbhost=$DB_HOST \
+wp core config --dbhost=$DB_HOST \
 				--dbname=$DB_NAME \
 				--dbuser=$DB_USER \
 				--dbpass=$DB_PASSWORD \
-				--allow-root 
+				--dbprefix=wp_ \
+				--allow-root
 
 wp core install --url=$WP_URL \
 				--title=$WP_TITLE \
