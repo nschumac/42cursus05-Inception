@@ -5,7 +5,7 @@ RUN apt-get update -y && apt-get upgrade -y \
 	&& rm -rf /etc/php/7.3/fpm/pool.d/www.conf \
 	&& apt-get install curl -y \
 	&& apt-get install mariadb-client -y \
-	&& mkdir /var/run/php-fpm && mkdir /run/php 
+	&& mkdir /run/php 
 
 COPY ./www.conf /etc/php/7.3/fpm/pool.d/
 
