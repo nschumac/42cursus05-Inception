@@ -6,7 +6,7 @@ RUN apt-get update -y && apt-get upgrade -y \
 	# removes some bloat
 	&& rm -rf /var/lib/apt/lists/*
 
-COPY ./50-server.conf /etc/mysql/mariadb.conf.d/
+COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/
 
 # Copy sql config file 
 COPY config.sql ./

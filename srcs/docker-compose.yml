@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3"
 
 volumes:
   mariadb_volume:
@@ -31,6 +31,8 @@ services:
       - yeet
     volumes:
       - mariadb_volume:/var/lib/mysql
+    env_file:
+      - .env
 
   wordpress:
     container_name: wordpress
@@ -45,6 +47,8 @@ services:
       - mariadb
     volumes:
       - wordpress_volume:/var/www/wordpress
+    env_file:
+      - .env
 
   nginx:
     container_name: nginx
