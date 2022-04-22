@@ -9,6 +9,9 @@ RUN apt-get update -y && apt-get upgrade -y \
 
 COPY ./www.conf /etc/php/7.3/fpm/pool.d/
 
+RUN	curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar --output /usr/bin/wp --silent
+RUN	chmod +x ./usr/bin/wp
+
 WORKDIR /var/www/
 
 RUN curl -O https://wordpress.org/latest.tar.gz \
@@ -17,8 +20,11 @@ RUN curl -O https://wordpress.org/latest.tar.gz \
 	&& rm -rf /var/lib/apt/lists/*
 
 # load configuration file of wordpress to root of wordpress dir
-COPY ./wp-config.php ./wordpress
+# COPY ./wp-config.php ./wordpress
+
+COPY config.sh ./
+RUN chmod +x config.sh
 
 EXPOSE 9000
 
-CMD ["php-fpm7.3", "-F"]
+CMD ["bash", "config.sh"]

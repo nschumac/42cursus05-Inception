@@ -5,6 +5,8 @@ clean:
 	sudo docker-compose -f ./srcs/docker-compose.yml down
 
 fclean:
-	sudo docker rmi $(sudo docker images -a -q)
-	sudo docker volume rm $(sudo docker volume ls -q)
-	sudo docker network rm $(sudo docker network ls -q)
+	sudo docker-compose -f ./srcs/docker-compose.yml down --volumes --rmi all
+	sudo rm -rf /home/nschumac/data/wp_database/*
+	sudo rm -rf /home/nschumac/data/wp_website/*
+
+re: fclean all
