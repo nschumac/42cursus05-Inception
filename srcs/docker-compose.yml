@@ -2,7 +2,17 @@ version: "3.3"
 
 volumes:
   mariadb_volume:
+    driver: local
+    driver_opts:
+        o: bind
+        type: none
+        device: /home/nschumac/data/wp_database
   wordpress_volume:
+    driver: local
+    driver_opts:
+        o: bind
+        type: none
+        device: /home/nschumac/data/wp_website
 
 networks:
   yeet:
